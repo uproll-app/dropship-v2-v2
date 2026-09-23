@@ -1,0 +1,6 @@
+{
+  "name": "Vexel Dropship - Modern Minimalist E-Commerce",
+  "description": "Ultra-fast minimalist e-commerce storefront with integrated dropshipping dashboard, real-time supplier inventory sync, order fulfillment tracking, and seamless checkout flow.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

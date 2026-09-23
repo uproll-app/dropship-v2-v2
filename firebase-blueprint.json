@@ -1,0 +1,144 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Store inventory products including viral fashion and trending gadgets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 250 },
+        "subtitle": { "type": "string", "maxLength": 400 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "price": { "type": "number" },
+        "compareAtPrice": { "type": "number" },
+        "supplierCost": { "type": "number" },
+        "supplierPlatform": { "type": "string", "maxLength": 50 },
+        "supplierProductCode": { "type": "string", "maxLength": 100 },
+        "supplierUrl": { "type": "string", "maxLength": 500 },
+        "stock": { "type": "number" },
+        "shippingDaysMin": { "type": "number" },
+        "shippingDaysMax": { "type": "number" },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "number" },
+        "category": { "type": "string", "maxLength": 100 },
+        "tags": { "type": "array" },
+        "images": { "type": "array" },
+        "variants": { "type": "array" },
+        "featured": { "type": "boolean" },
+        "freeDelivery": { "type": "boolean" },
+        "codAvailable": { "type": "boolean" },
+        "isTopProductHero": { "type": "boolean" },
+        "heroOrder": { "type": "number" },
+        "heroTagline": { "type": "string", "maxLength": 200 },
+        "heroBadge": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["title", "price", "category"]
+    },
+    "HeroSlide": {
+      "title": "HeroSlide",
+      "description": "Featured top product slides controlled from the admin dashboard for the hero slider",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "productId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "subtitle": { "type": "string", "maxLength": 300 },
+        "badge": { "type": "string", "maxLength": 100 },
+        "price": { "type": "number" },
+        "compareAtPrice": { "type": "number" },
+        "imageUrl": { "type": "string", "maxLength": 1000 },
+        "ctaText": { "type": "string", "maxLength": 100 },
+        "order": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["title", "productId", "order", "isActive"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer cash on delivery purchase orders",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "orderNumber": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "maxLength": 100 },
+        "customer": { "type": "object" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "shippingCost": { "type": "number" },
+        "total": { "type": "number" },
+        "supplierTotalCost": { "type": "number" },
+        "resellerProfitMargin": { "type": "number" },
+        "status": { "type": "string", "maxLength": 50 },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "paymentStatus": { "type": "string", "maxLength": 50 },
+        "supplierPlatform": { "type": "string", "maxLength": 50 },
+        "userId": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["orderNumber", "customer", "items", "total", "status"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile with role definition",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "displayName": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["uid", "email"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized admin records for RBAC Master Gate verification",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "addedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["uid", "email"]
+    },
+    "TestConnection": {
+      "title": "TestConnection",
+      "description": "Health check document used to verify database connectivity",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "maxLength": 50 }
+      }
+    }
+  },
+  "firestore": {
+    "/test/{testId}": {
+      "schema": "TestConnection",
+      "description": "Connection test document for health checks"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Product catalog items displayed on the storefront"
+    },
+    "/hero_slides/{slideId}": {
+      "schema": "HeroSlide",
+      "description": "Top featured product slides displayed in the storefront hero slider"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer cash on delivery orders with fulfillment status"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Customer and store manager user profiles"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Master RBAC list for verifying administrator privileges"
+    }
+  }
+}
